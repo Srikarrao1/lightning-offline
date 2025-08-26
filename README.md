@@ -239,7 +239,7 @@ bash# Alice → Bob → Charlie payment routing
 # Enables global payment networks
 🛠️ Development
 Building from Source
-bashgit clone https://github.com/yourusername/lightning-offline.git
+bashgit clone https://github.com/Srikarrao1/lightning-offline
 cd lightning-offline
 cargo build
 cargo test
