@@ -293,5 +293,5 @@ Discussions: GitHub Discussions
 Documentation: Wiki
 
 
-Built with ❤️ in Rust | Powered by Lightning Network ⚡
+## Built with ❤️ in Rust | Powered by Lightning Network ⚡
 "Be your own payment processor"
