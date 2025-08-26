@@ -124,19 +124,6 @@ API Request → Channel Manager → Cryptographic Signing → Database → P2P B
                      ↓
               Balance Updates → Commitment Transactions → Payment History
 
-📁 Project Structure
-
-lightning-offline/
-├── src/
-│   ├── main.rs           # Application entry point
-│   ├── api.rs            # RESTful API server
-│   ├── channel.rs        # Payment channel logic
-│   ├── crypto.rs         # Cryptographic operations
-│   ├── p2p.rs           # P2P networking layer
-│   └── storage.rs        # Database operations
-├── data/                 # SQLite databases
-├── Cargo.toml           # Rust dependencies
-└── README.md            # This file
 
 🔧 Configuration
 
