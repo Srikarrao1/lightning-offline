@@ -21,7 +21,7 @@ Git
 
 Installation
 bash# Clone the repository
-git clone https://github.com/yourusername/lightning-offline.git
+https://github.com/Srikarrao1/lightning-offline
 cd lightning-offline
 
 # Build the project
