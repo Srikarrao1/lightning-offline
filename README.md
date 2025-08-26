@@ -59,13 +59,17 @@ Listening on /ip4/127.0.0.1/tcp/4001
 💰 Basic Usage
 
 1. Check Node Information
-2. bash# Get Alice's node info
+
+ bash# Get Alice's node info
 curl http://localhost:3000/api/node/info
 
 # Get Bob's node info  
 curl http://localhost:3001/api/node/info
+
 2. Open a Payment Channel
+
 bash# Open channel from Alice to Bob (1,000,000 satoshis)
+
 curl -X POST http://localhost:3000/api/channels \
   -H "Content-Type: application/json" \
   -d '{
@@ -73,32 +77,48 @@ curl -X POST http://localhost:3000/api/channels \
     "capacity": 1000000
   }'
 3. Send Lightning Payments
+
 bash# Send 50,000 satoshis through the channel
+
 curl -X POST http://localhost:3000/api/channels/CHANNEL_ID/payments \
   -H "Content-Type: application/json" \
   -d '{
     "amount": 50000
   }'
+  
 4. Check Payment History
+   
 bash# List all channels
+
 curl http://localhost:3000/api/channels
 
 # Get payment history for a channel
+
 curl http://localhost:3000/api/channels/CHANNEL_ID/payments
+
+
 🏗️ Architecture
+
 Core Components
 
 P2P Layer: libp2p-based networking with mDNS discovery
+
 Channel Manager: Payment channel state management
+
 Key Manager: Cryptographic operations and key derivation
+
 API Server: RESTful HTTP interface
+
 Database: SQLite persistence layer
 
 Data Flow
+
 API Request → Channel Manager → Cryptographic Signing → Database → P2P Broadcast
                      ↓
               Balance Updates → Commitment Transactions → Payment History
+
 📁 Project Structure
+
 lightning-offline/
 ├── src/
 │   ├── main.rs           # Application entry point
@@ -110,34 +130,51 @@ lightning-offline/
 ├── data/                 # SQLite databases
 ├── Cargo.toml           # Rust dependencies
 └── README.md            # This file
+
 🔧 Configuration
+
 Environment Variables
+
 bash# Server configuration
+
 export PORT=3000                    # HTTP API port
+
 export P2P_PORT=4001                # P2P listening port
+
 export DATABASE_URL=./data/lightning.db
 
 # Network configuration
+
 export NETWORK=regtest              # Bitcoin network
+
 export LOG_LEVEL=info              # Logging verbosity
 
 # P2P configuration
+
 export BOOTSTRAP_PEERS=/ip4/127.0.0.1/tcp/4001/p2p/...
+
 Database Schema
+
 The system uses SQLite with these main tables:
 
 channels - Payment channel state and balances
+
 commitment_transactions - Cryptographic channel commitments
+
 payments - Payment history and metadata
 
 🔐 Security Features
 
 secp256k1 Signatures: All transactions cryptographically signed
+
 Multisig Addresses: Channel funding secured by 2-of-2 multisig
+
 Commitment Transactions: Time-locked channel state commitments
+
 Balance Validation: Prevents double-spending and overdrafts
 
 💻 API Reference
+
 Node Information
 bashGET /api/node/info
 Response: {
