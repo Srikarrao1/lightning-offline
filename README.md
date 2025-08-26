@@ -1,4 +1,4 @@
-##Lightning Offline Network ⚡
+## Lightning Offline Network ⚡
 
 
 A lightweight Lightning Network implementation in Rust that enables instant Bitcoin payments without requiring constant blockchain connectivity. Perfect for offline environments, IoT devices, and areas with limited internet access.
