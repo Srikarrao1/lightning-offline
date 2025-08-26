@@ -16,33 +16,50 @@ Real-time Networking: Built on tokio async runtime
 Prerequisites
 
 Rust 1.70+
+
 SQLite3
+
 Git
 
 Installation
 bash# Clone the repository
+
 https://github.com/Srikarrao1/lightning-offline
+
 cd lightning-offline
 
 # Build the project
+
 cargo build --release
 
 # Create data directory
+
 mkdir -p data
+
 Running Your First Node
+
 bash# Start Alice's node
+
 PORT=3000 DATABASE_URL=./data/alice.db ./target/release/lightning-offline
 
 # In another terminal, start Bob's node
+
 PORT=3001 P2P_PORT=4002 DATABASE_URL=./data/bob.db ./target/release/lightning-offline
+
 You should see logs indicating successful startup:
+
 INFO lightning_offline: Starting Lightning Network Offline Node
+
 INFO lightning_offline: Node ID: d61927be94fb4c5892f90a8234df20fd2185191882bdd98e684f77a8822ebdab
+
 Local peer id: 12D3KooWRkt8z6pMTVMirEopTrG1zMQKAxej3Nt2zpqSv9ikmcEE
+
 Listening on /ip4/127.0.0.1/tcp/4001
+
 💰 Basic Usage
+
 1. Check Node Information
-bash# Get Alice's node info
+2. bash# Get Alice's node info
 curl http://localhost:3000/api/node/info
 
 # Get Bob's node info  
