@@ -5,14 +5,21 @@ A lightweight Lightning Network implementation in Rust that enables instant Bitc
 🌟 Features
 
 Instant Payments: Send and receive Lightning payments in milliseconds
+
 Offline Capable: Works without internet connectivity to Bitcoin network
+
 P2P Discovery: Automatic peer discovery using mDNS/libp2p
+
 RESTful API: Easy integration with web applications
+
 Persistent Storage: SQLite database for channels and payment history
+
 Cryptographic Security: secp256k1 signatures and multisig addresses
+
 Real-time Networking: Built on tokio async runtime
 
 🚀 Quick Start
+
 Prerequisites
 
 Rust 1.70+
