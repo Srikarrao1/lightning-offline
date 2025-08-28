@@ -90,11 +90,39 @@ impl ChannelManager {
         let funding_txid = format!("funding_{}", Uuid::new_v4());
 
         // Create multisig address (simplified - in reality, coordinate with peer)
-        let peer_pubkey = bitcoin::secp256k1::PublicKey::from_slice(&hex::decode(&peer_node_id)?)?;
-        let multisig_address = self
-            .key_manager
-            .create_multisig_address(&peer_pubkey)?
-            .to_string();
+        let multisig_address = if peer_node_id.starts_with("12D3") {
+            // This is a libp2p peer ID - generate a dummy multisig address for testing
+            let uuid_hex = Uuid::new_v4().to_string().replace("-", "");
+            // Safe slicing with proper bounds checking
+            let addr_hash = if uuid_hex.len() >= 20 {
+                &uuid_hex[..20]
+            } else {
+                &uuid_hex
+            };
+            format!("bcrt1q{}", addr_hash)
+        } else {
+            // Assume it's a hex-encoded Bitcoin pubkey
+            match hex::decode(&peer_node_id) {
+                Ok(decoded) => match bitcoin::secp256k1::PublicKey::from_slice(&decoded) {
+                    Ok(peer_pubkey) => self
+                        .key_manager
+                        .create_multisig_address(&peer_pubkey)?
+                        .to_string(),
+                    Err(_) => {
+                        return Err(anyhow::anyhow!(
+                            "Invalid public key format: {}",
+                            peer_node_id
+                        ));
+                    }
+                },
+                Err(_) => {
+                    return Err(anyhow::anyhow!(
+                        "Invalid hex encoding in peer node ID: {}",
+                        peer_node_id
+                    ));
+                }
+            }
+        };
 
         let channel = PaymentChannel {
             id: channel_id.clone(),
